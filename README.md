@@ -8,12 +8,12 @@ O objetivo é um microserviço que conforme informado a cidade, dependendo da te
  * Utilização do micrometer com prometheus para coletar métricas do microserviço
  * Utilização de docker e docker compose para iniciar container com redis, prometheus e grafana
  
-####Pré-requisitos para rodar o microserviço
+##Pré-requisitos para rodar o microserviço
  * docker (Para uso do Redis, Prometheus e Grafana)
  * java 11 (Nessário para rodar a aplicação em sua maquina local, para rodar em um docker não é necessário)
  * maven 3.6.3 (Nessário para rodar a aplicação em sua maquina local, para rodar em um docker não é necessário)
  
-####Opção de execução 1 
+##Opção de execução 1 
 Acessar a raiz do projeto usando o prompt e executar  (tudo ocorrendo você deve conseguir acessar )
 
  ```
@@ -28,14 +28,14 @@ Ainda na raiz do projeto executar o docker compose para subir os serviços de re
 Tudo ocorrendo bem, você deve conseguir acessar o link http://localhost:8080/swagger-ui-custom.html 
 
 
-####Opção de execução 2
+##Opção de execução 2
 Para rodar tudo dentro do docker execute o comando a baixo na raiz do projeto:
 
 ```
 docker-compose -f docker-compose.yml -f docker-compose-app.yml up
 ```
  
-####Usando o microserviço
+##Usando o microserviço
 
 Se tudo estiver ocorrido bem basta abrir no browser a url a baixo, será possivel visualizar as endpoints disponíveis.
 
@@ -75,7 +75,7 @@ Na pasta docker, no arquivo app.env e em resource no arquivo application-dev.yml
 Essas chaves foram geradas com email temporários e login falsos, e podem parar de funcionar, caso você tenha algum problema, pode ser que essas chaves não funcione mais, você pode obter novas chaves para usar em [Spotify](https://developer.spotify.com/documentation/web-api/quick-start/) e [Openweather](https://home.openweathermap.org/users/sign_up)
 
 
-####Documentações de referência para bibliotecas utilizadas
+##Documentações de referência para bibliotecas utilizadas
 
 * [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
 * [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.3.5.RELEASE/maven-plugin/reference/html/)
