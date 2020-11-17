@@ -1,0 +1,128 @@
+APP_SPOTIFY_KEY: 'SUA KEY AQUI' 
+APP_SPOTIFY_SECRET: 'SUA SECRET AQUI' 
+APP_OPENWEATHER_APPID: 'SEU APPID AQUI'
+
+APP_REDIS_HOST: localhost
+APP_REDIS_PORT: 6379
+
+spring.profiles.active: dev
+
+server:
+  port: 8080
+info:
+  name: '${spring.application.name}'
+  description: Suggestion Track
+  environment: '${spring.profiles.active}'
+  version: 0.0.1
+  author: Charles Rodrigo
+  mail: charlesrodrigo@gmail.com
+  
+app:
+  spotify:
+    key: '${APP_SPOTIFY_KEY}'
+    secret: '${APP_SPOTIFY_SECRET}'
+    url-track: https://open.spotify.com/album/
+  openweather:
+    url: api.openweathermap.org/data/2.5/
+    appid: '${APP_OPENWEATHER_APPID}'
+  slowservice:
+    url: postman-echo.com/delay/10/
+    
+spring:
+  application.name: spring-boot-suggestion-track
+  cache:
+    type: redis
+    redis:
+      time-to-live: 100000
+      key-prefix: 'suggestion-track::'
+  redis:
+    timeout: 100
+    host: '${APP_REDIS_HOST}'
+    port: '${APP_REDIS_PORT}'
+    
+springdoc.swagger-ui:
+  path: /swagger-ui-custom.html
+  operationsSorter: method
+  
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+    ratelimiters:
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  metrics:
+    tags:
+      application: '${spring.application.name}'
+    enable:
+      all: true
+      jvm: true
+    distribution.percentiles-histogram:
+      http.server.requests: true
+      resilience4j.circuitbreaker.calls: true
+    export:
+      prometheus:
+        enabled: true
+  endpoint:
+    health:
+      show-details: always
+    metrics:
+      enabled: false
+    prometheus:
+      enabled: true
+      
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 3000
+        readTimeout: 2000
+        logger-level: basic
+        
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      minimumNumberOfCalls: 5
+      permittedNumberOfCallsInHalfOpenState: 3
+      automaticTransitionFromOpenToHalfOpenEnabled: true
+      waitDurationInOpenState: 30s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+      recordExceptions:
+        - java.lang.Throwable
+        - java.util.concurrent.TimeoutException
+        - java.io.IOException
+      ignore-exceptions:
+        - feign.FeignException$NotFound
+  instances:
+    OpenWeather:
+      baseConfig: default
+    Spotify:
+      baseConfig: default
+      
+resilience4j.retry:
+  configs:
+    default:
+      maxRetryAttempts: 3
+      waitDuration: 500
+      retryExceptions:
+        - java.lang.Throwable
+        - java.util.concurrent.TimeoutException
+        - java.io.IOException
+      ignore-exceptions:
+        - feign.FeignException$NotFound
+  instances:
+    OpenWeather:
+      baseConfig: default
+    Spotify:
+      baseConfig: default
+      
+message.suggestion.temperature.notfound: Não conseguimos a temperatura da sua cidade
+message.suggestion.music.notfound: >-
+  Não conseguimos obter uma playlist que a temperatura atual exige, mas
+  sugerimos essa que casa bem com qualquer temperatura, esperamos que goste

@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+    image: spring-boot-suggestion-track:latest
+    env_file:
+      - ./docker/app.env
+    ports:
+      - 8080:8080
+    links:
+      - redis
+    depends_on:
+      - redis
+   
