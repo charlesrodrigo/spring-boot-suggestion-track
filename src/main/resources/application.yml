@@ -1,11 +1,11 @@
+spring.profiles.active: dev
+
 APP_SPOTIFY_KEY: 'SUA KEY AQUI' 
 APP_SPOTIFY_SECRET: 'SUA SECRET AQUI' 
 APP_OPENWEATHER_APPID: 'SEU APPID AQUI'
 
 APP_REDIS_HOST: localhost
 APP_REDIS_PORT: 6379
-
-spring.profiles.active: dev
 
 server:
   port: 8080
