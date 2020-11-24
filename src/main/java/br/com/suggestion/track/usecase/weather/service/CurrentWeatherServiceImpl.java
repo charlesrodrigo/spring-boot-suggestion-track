@@ -5,7 +5,6 @@ import java.util.Random;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import br.com.suggestion.track.services.slow.SimuleSlowService;
@@ -27,13 +26,11 @@ public class CurrentWeatherServiceImpl implements CurrentWeatherService {
   Logger logger = LogManager.getLogger(CurrentWeatherServiceImpl.class);
 
   OpenWeatherService openWeatherFeing;
-  CacheManager cacheManager;
   SimuleSlowService slowService;
 
-  public CurrentWeatherServiceImpl(OpenWeatherService openWeatherFeing, CacheManager cacheManager,
+  public CurrentWeatherServiceImpl(OpenWeatherService openWeatherFeing,
       SimuleSlowService slowService) {
     this.openWeatherFeing = openWeatherFeing;
-    this.cacheManager = cacheManager;
     this.slowService = slowService;
   }
 
