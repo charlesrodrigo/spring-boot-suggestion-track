@@ -69,7 +69,6 @@ public class CurrentWeatherServiceImpl implements CurrentWeatherService {
   private boolean isCallSlow() {
     var random = new Random();
     var value = random.nextInt(10);
-    System.out.println((value % 2 == 0));
     return (value % 2 == 0);
   }
 
