@@ -35,9 +35,6 @@ public class MusicServiceSpotifyImpl implements MusicService {
 
   private static final String NAME_RESILIENCE = "Spotify";
 
-  @Value("${message.suggestion.music.notfound}")
-  private String messageMusicNotFound;
-
   @Value("${app.spotify.key}")
   private String clientId;
   @Value("${app.spotify.secret}")
