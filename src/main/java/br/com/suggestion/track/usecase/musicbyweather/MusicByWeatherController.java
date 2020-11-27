@@ -21,12 +21,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 @RestController
 public class MusicByWeatherController {
 
-  MusicService music;
+  MusicService musicService;
 
   CurrentWeatherService currentWeatherService;
 
   public MusicByWeatherController(MusicService music, CurrentWeatherService currentWeatherService) {
-    this.music = music;
+    this.musicService = music;
     this.currentWeatherService = currentWeatherService;
   }
 
@@ -46,7 +46,7 @@ public class MusicByWeatherController {
     var musicStyle = this.currentWeatherService
         .getStyleMusicByTemperature(currentWeatherEntity.getTemperature());
 
-    return this.music.getPlaylist(musicStyle);
+    return this.musicService.getPlaylist(musicStyle);
 
   }
 
