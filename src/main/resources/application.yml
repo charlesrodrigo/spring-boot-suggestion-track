@@ -25,7 +25,7 @@ app:
   openweather:
     url: api.openweathermap.org/data/2.5/
     appid: '${APP_OPENWEATHER_APPID}'
-  slowservice:
+  slowclient:
     url: postman-echo.com/delay/10/
     
 spring:

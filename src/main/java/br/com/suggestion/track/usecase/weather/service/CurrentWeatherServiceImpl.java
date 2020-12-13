@@ -7,7 +7,8 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import br.com.suggestion.track.services.slow.SimuleSlowService;
+import br.com.suggestion.track.client.OpenWeatherClient;
+import br.com.suggestion.track.client.SimuleSlowClient;
 import br.com.suggestion.track.usecase.weather.dto.CurrentWeatherDTO;
 import feign.FeignException.NotFound;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
@@ -25,13 +26,13 @@ public class CurrentWeatherServiceImpl implements CurrentWeatherService {
   private static final String NAME_RESILIENCE = "OpenWeather";
   Logger logger = LogManager.getLogger(CurrentWeatherServiceImpl.class);
 
-  OpenWeatherService openWeatherFeing;
-  SimuleSlowService slowService;
+  OpenWeatherClient openWeatherClient;
+  SimuleSlowClient slowClient;
 
-  public CurrentWeatherServiceImpl(OpenWeatherService openWeatherFeing,
-      SimuleSlowService slowService) {
-    this.openWeatherFeing = openWeatherFeing;
-    this.slowService = slowService;
+  public CurrentWeatherServiceImpl(OpenWeatherClient openWeatherClient,
+      SimuleSlowClient slowClient) {
+    this.openWeatherClient = openWeatherClient;
+    this.slowClient = slowClient;
   }
 
 
@@ -46,7 +47,7 @@ public class CurrentWeatherServiceImpl implements CurrentWeatherService {
       throw new IllegalArgumentException();
     }
 
-    var message = this.openWeatherFeing.getTemperature(cityOrLatLong);
+    var message = this.openWeatherClient.getTemperature(cityOrLatLong);
     return Optional.ofNullable(new CurrentWeatherDTO(cityOrLatLong, message.getMain().getTemp()));
   }
 
@@ -56,7 +57,7 @@ public class CurrentWeatherServiceImpl implements CurrentWeatherService {
   public Optional<CurrentWeatherDTO> simuleCurrentTemperatureFallback(String cityOrLatLong) {
     if (this.isCallSlow()) {
       this.logger.info("chamada lenta");
-      this.slowService.getSlow();
+      this.slowClient.getSlow();
     } else {
       this.logger.info("chamada com erro");
       throw new IllegalArgumentException();
