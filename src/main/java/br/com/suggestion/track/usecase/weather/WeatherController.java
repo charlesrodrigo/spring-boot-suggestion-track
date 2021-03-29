@@ -55,6 +55,4 @@ public class WeatherController {
         () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource"));
   }
 
-
-
 }

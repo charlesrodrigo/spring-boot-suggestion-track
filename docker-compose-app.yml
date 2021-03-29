@@ -5,7 +5,7 @@ services:
       context: .
     image: spring-boot-suggestion-track:latest
     env_file:
-      - ./docker/app.env
+      - ./src/main/resources/docker/app.env
     ports:
       - 8080:8080
     links:

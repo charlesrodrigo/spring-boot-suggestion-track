@@ -1,11 +1,10 @@
-spring.profiles.active: dev
-
 APP_SPOTIFY_KEY: 'SUA KEY AQUI' 
 APP_SPOTIFY_SECRET: 'SUA SECRET AQUI' 
 APP_OPENWEATHER_APPID: 'SEU APPID AQUI'
 
 APP_REDIS_HOST: localhost
 APP_REDIS_PORT: 6379
+APP_JAGER_URL: http://localhost:9411
 
 server:
   port: 8080
@@ -26,10 +25,11 @@ app:
     url: api.openweathermap.org/data/2.5/
     appid: '${APP_OPENWEATHER_APPID}'
   slowclient:
-    url: postman-echo.com/delay/10/
+    url: https://run.mocky.io/v3/e2aca955-604c-4ea3-bdad-034ab98a1f5c?mocky-delay=10s
     
 spring:
   application.name: spring-boot-suggestion-track
+  zipkin.base-url: ${APP_JAGER_URL}
   cache:
     type: redis
     redis:
