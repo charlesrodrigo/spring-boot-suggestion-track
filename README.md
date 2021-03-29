@@ -6,10 +6,11 @@ O objetivo é um microserviço que conforme informado a cidade, dependendo da te
  * Utilização do Resilience4j para garantir a resiliência, tolerância a falhas e responsivo;
  * Utilização do Redis para cache
  * Utilização do micrometer com prometheus para coletar métricas do microserviço
- * Utilização de docker e docker compose para iniciar container com redis, prometheus e grafana
+ * Utilização de docker e docker compose para iniciar container com redis, prometheus, grafana e jaeger
+
  
 ## Pré-requisitos para rodar o microserviço
- * docker (Para uso do Redis, Prometheus e Grafana)
+ * docker (Para uso do Redis, Prometheus, Grafana e Jaeger)
  * java 11 (Nessário para rodar a aplicação em sua maquina local, para rodar em um docker não é necessário)
  * maven 3.6.3 (Nessário para rodar a aplicação em sua maquina local, para rodar em um docker não é necessário)
  
@@ -94,3 +95,4 @@ Essas chaves foram geradas com email temporários e login falsos, e podem parar 
 * [Spotify Web Api Java](https://github.com/thelinmichael/spotify-web-api-java)
 * [Spring Doc](https://springdoc.org/)
 * [Micrometer](http://micrometer.io/docs/registry/prometheus#_installing)
+* [Spring Cloud Sleuth](https://spring.io/projects/spring-cloud-sleuth)
