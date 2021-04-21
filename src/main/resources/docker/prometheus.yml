@@ -7,14 +7,14 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090'] #Servidor prometheus
   
-  - job_name: 'service-user'
-    scrape_interval: 5s
-    metrics_path: '/actuator/prometheus' #path da aplicação
-    static_configs:
-      - targets: ['host.docker.internal:8080'] #Servidor da minha aplicação    
-
   - job_name: 'spring-boot-suggestion-track'
     scrape_interval: 5s
     metrics_path: '/actuator/prometheus' #path da aplicação
     static_configs:
-      - targets: ['host.docker.internal:8081'] #Servidor da minha aplicação
+      - targets: ['host.docker.internal:8080'] #Servidor da minha aplicação
+
+  - job_name: 'jaeger'
+    scrape_interval: 5s
+    metrics_path: '/metrics' #path do jaeger
+    static_configs:
+      - targets: ['jaeger:16687'] #jaeger    
